@@ -3,7 +3,7 @@ import { Image, ImageBackground,StyleSheet,Text,View} from 'react-native';
 import Appbutton from './Appbutton';
 import Appbutton2 from './Appbutton2';
 
-function WelcomeScreen(props) {
+function WelcomeScreen(props) { 
     return (
         <ImageBackground 
         style={styles.background}
