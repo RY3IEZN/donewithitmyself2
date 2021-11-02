@@ -7,22 +7,17 @@ import WelcomeScreen from './apps/WelcomeScreen';
 import ListingDetailsScreen from './apps/ListingDetailsScreen';
 import ListItem from './apps/ListItem';
 import Card from './apps/Card';
+import MessageScreen from './apps/MessageScreen';
+import Screen from './apps/Screen';
+import Icon from './apps/Icon';
+import AccountScreen from './apps/AccountScreen';
+import ListingsScreen from './apps/ListingsScreen';
 
 
 export default function App() {
   return (
-    
-    <View style={{
-      backgroundColor : "#f8f4f4",
-      padding : 20,
-      paddingTop : 100
-    }}>
-      <Card 
-      title="red jacket fpr sale"
-      subTitle="$100"
-      image={require("./assets/jacket.jpg")} />
 
-    </View>
+    <ListingsScreen />
 
-  );
+  ); 
 }
