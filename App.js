@@ -14,23 +14,10 @@ import AccountScreen from './apps/AccountScreen';
 import ListingsScreen from './apps/ListingsScreen';
 import AppTextInputBox from './apps/AppTextInputBox';
 import AppPicker from './apps/AppPicker';
+import LoginScreen from './apps/LoginScreen';
 
 export default function App() {
-
-
-  const [isNew, setIsNew] = useState(false);
-
   return (
-    
-    <Screen>
-
-<AppPicker icon="apps" placeholder="Category"/>
-<AppTextInputBox icon="email" placeholder="email" />
-
-
-  </Screen>
-
-
-
+    <LoginScreen />
   ); 
 }
