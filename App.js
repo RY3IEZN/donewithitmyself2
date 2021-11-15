@@ -21,5 +21,5 @@ import AppFormPicker from "./apps/AppFormPicker";
 import ListingEditScreen from "./apps/ListingEditScreen";
 
 export default function App() {
-  return <Screen />;
+  return <WelcomeScreen />;
 }
