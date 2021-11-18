@@ -10,7 +10,7 @@ function WelcomeScreen(props) {
         source={require("../assets/background.jpg")}>
             <View style={styles.logoContainer}>
             <Image style={styles.logo} source={require("../assets/logo-red.png")}/>
-            <Text>you are doing well</Text>
+            <Text>you are doing better well</Text>
             </View>
             <View style={styles.buttonContainer}>
             <Appbutton title="Login"/>
