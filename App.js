@@ -19,7 +19,8 @@ import AppPicker from "./apps/AppPicker";
 import LoginScreen from "./apps/LoginScreen";
 import AppFormPicker from "./apps/AppFormPicker";
 import ListingEditScreen from "./apps/ListingEditScreen";
+import PickerItem from "./apps/PickerItem";
 
 export default function App() {
-  return <LoginScreen />;
+  return <AppTextInputBox />;
 }
