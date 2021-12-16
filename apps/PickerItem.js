@@ -1,23 +1,20 @@
-import React from 'react';
-import { TouchableOpacity , StyleSheet} from 'react-native';
-import AppText from './AppText';
+/** @format */
 
-function PickerItem ({label,onPress}) {
+import React from "react";
+import { TouchableOpacity, StyleSheet } from "react-native";
+import AppText from "./AppText";
 
-
-    return (
-        <TouchableOpacity onPress={onPress}>
-            <AppText
-            style={styles.text}>{label}</AppText>
-        </TouchableOpacity>    
-    );
+function PickerItem({ onPress, item }) {
+  return (
+    <TouchableOpacity onPress={onPress}>
+      <AppText style={styles.text}>{item.label}</AppText>
+    </TouchableOpacity>
+  );
 }
 
-
 const styles = StyleSheet.create({
-    text:{
-        padding:20
-    }
-    
-})
+  text: {
+    padding: 20,
+  },
+});
 export default PickerItem;

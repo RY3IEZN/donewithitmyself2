@@ -10,6 +10,7 @@ import {
   TouchableWithoutFeedback,
   Button,
   FlatList,
+  PickerItemComponent,
 } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import AppText from "./AppText";
@@ -23,6 +24,8 @@ function AppPicker({
   items,
   onSelectItem,
   selectedItem,
+  numberOfColums,
+  PickerItemComponent = PickerItem,
 }) {
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -52,9 +55,11 @@ function AppPicker({
           <Button title="close" onPress={() => setModalVisible(false)} />
           <FlatList
             data={items}
+            numColumns={numberOfColums}
             keyExtractor={(item) => item.value.toString()}
             renderItem={({ item }) => (
-              <PickerItem
+              <PickerItemComponent
+                item={item}
                 label={item.label}
                 onPress={() => {
                   setModalVisible(false);

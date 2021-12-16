@@ -1,8 +1,16 @@
 /** @format */
 
 import { StatusBar } from "expo-status-bar";
-import React, { useState } from "react";
-import { StyleSheet, Text, View, Style, TextInput, Switch } from "react-native";
+import React, { useEffect, useState } from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Style,
+  TextInput,
+  Switch,
+  Image,
+} from "react-native";
 import Appbutton from "./apps/Appbutton";
 import ViewImageScreen from "./apps/ViewImageScreen";
 import WelcomeScreen from "./apps/WelcomeScreen";
@@ -21,6 +29,35 @@ import AppFormPicker from "./apps/AppFormPicker";
 import ListingEditScreen from "./apps/ListingEditScreen";
 import PickerItem from "./apps/PickerItem";
 
+import * as ImagePicker from "expo-image-picker";
+import ImageInput from "./apps/ImageInput";
+
 export default function App() {
-  return <AppTextInputBox />;
+  const [imageUri, setImageUri] = useState();
+
+  const requestPermission = async () => {
+    const { granted } = await ImagePicker.requestCameraPermissionsAsync();
+    if (!granted) alert("you need to give permissions");
+  };
+
+  useEffect(() => {
+    requestPermission();
+  }, []);
+
+  const selectImage = async () => {
+    try {
+      const result = await ImagePicker.launchImageLibraryAsync();
+      if (!result.cancelled) setImageUri(result.uri);
+    } catch (error) {
+      console.log("coudnt read library", error);
+    }
+  };
+
+  return (
+    <Screen>
+      <Appbutton title="Select image" onPress={selectImage} />
+      <Image source={{ uri: imageUri }} Style={{ width: 200, height: 100 }} />
+      <ImageInput imageUri={imageUri} />
+    </Screen>
+  );
 }
