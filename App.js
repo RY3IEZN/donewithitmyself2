@@ -31,11 +31,12 @@ import PickerItem from "./apps/PickerItem";
 
 import * as ImagePicker from "expo-image-picker";
 import ImageInput from "./apps/ImageInput";
+import ImageInputList from "./apps/ImageInputList";
 
 export default function App() {
-  const [imageUri, setImageUri] = useState();
+  //const [imageUris, setImageUris] = useState([]);
 
-  const requestPermission = async () => {
+  /*  const requestPermission = async () => {
     const { granted } = await ImagePicker.requestCameraPermissionsAsync();
     if (!granted) alert("you need to give permissions");
   };
@@ -52,12 +53,26 @@ export default function App() {
       console.log("coudnt read library", error);
     }
   };
+ */
+  /* 
+  const handleAdd = (uri) => {
+    setImageUris([...imageUris, uri]);
+  };
 
+  const handleRemove = (uri) => {
+    setImageUris(imageUris.filter((imageUri) => imageUri !== uri));
+  };
+ */
   return (
+    <ListingEditScreen />
+
+    /* 
     <Screen>
-      <Appbutton title="Select image" onPress={selectImage} />
-      <Image source={{ uri: imageUri }} Style={{ width: 200, height: 100 }} />
-      <ImageInput imageUri={imageUri} />
-    </Screen>
+      <ImageInputList
+        imageUris={imageUris}
+        onAddImage={handleAdd}
+        onRemoveImage={handleRemove}
+      />
+    </Screen> */
   );
 }
