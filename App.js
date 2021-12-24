@@ -1,78 +1,38 @@
 /** @format */
 
-import { StatusBar } from "expo-status-bar";
-import React, { useEffect, useState } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  Style,
-  TextInput,
-  Switch,
-  Image,
-} from "react-native";
-import Appbutton from "./apps/Appbutton";
-import ViewImageScreen from "./apps/ViewImageScreen";
-import WelcomeScreen from "./apps/WelcomeScreen";
-import ListingDetailsScreen from "./apps/ListingDetailsScreen";
-import ListItem from "./apps/ListItem";
-import Card from "./apps/Card";
-import MessageScreen from "./apps/MessageScreen";
+import { Text } from "react-native";
 import Screen from "./apps/Screen";
-import Icon from "./apps/Icon";
-import AccountScreen from "./apps/AccountScreen";
-import ListingsScreen from "./apps/ListingsScreen";
-import AppTextInputBox from "./apps/AppTextInputBox";
-import AppPicker from "./apps/AppPicker";
-import LoginScreen from "./apps/LoginScreen";
-import AppFormPicker from "./apps/AppFormPicker";
-import ListingEditScreen from "./apps/ListingEditScreen";
-import PickerItem from "./apps/PickerItem";
+import React from "react";
+import { View, StyleSheet } from "react-native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { NavigationContainer } from "@react-navigation/native";
 
-import * as ImagePicker from "expo-image-picker";
-import ImageInput from "./apps/ImageInput";
-import ImageInputList from "./apps/ImageInputList";
+const Tweet = () => {
+  <Screen>
+    <Text> Page one</Text>
+  </Screen>;
+};
 
-export default function App() {
-  //const [imageUris, setImageUris] = useState([]);
+const TweetDetails = () => {
+  <Screen>
+    <Text> details of page 1 </Text>
+  </Screen>;
+};
 
-  /*  const requestPermission = async () => {
-    const { granted } = await ImagePicker.requestCameraPermissionsAsync();
-    if (!granted) alert("you need to give permissions");
-  };
+const Stack = createNativeStackNavigator();
+const NativeStackNavigator = () => {
+  <Stack.NativeStackNavigator>
+    <Stack.Screen name="tweets" components={Tweet} />
+    <Stack.Screen name="tweetsdetails" components={TweetDetails} />
+  </Stack.NativeStackNavigator>;
+};
 
-  useEffect(() => {
-    requestPermission();
-  }, []);
-
-  const selectImage = async () => {
-    try {
-      const result = await ImagePicker.launchImageLibraryAsync();
-      if (!result.cancelled) setImageUri(result.uri);
-    } catch (error) {
-      console.log("coudnt read library", error);
-    }
-  };
- */
-  /* 
-  const handleAdd = (uri) => {
-    setImageUris([...imageUris, uri]);
-  };
-
-  const handleRemove = (uri) => {
-    setImageUris(imageUris.filter((imageUri) => imageUri !== uri));
-  };
- */
+function App(props) {
   return (
-    <ListingEditScreen />
-
-    /* 
-    <Screen>
-      <ImageInputList
-        imageUris={imageUris}
-        onAddImage={handleAdd}
-        onRemoveImage={handleRemove}
-      />
-    </Screen> */
+    <NavigationContainer>
+      <StackNavigator />
+    </NavigationContainer>
   );
 }
+
+export default App;
