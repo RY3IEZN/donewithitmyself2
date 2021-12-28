@@ -1,38 +1,37 @@
 /** @format */
 
-import { Text } from "react-native";
-import Screen from "./apps/Screen";
 import React from "react";
-import { View, StyleSheet } from "react-native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { Button, Text } from "react-native";
+import Screen from "./apps/Screen";
+import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 
-const Tweet = () => {
+const Tweets = ({ navigation }) => (
   <Screen>
-    <Text> Page one</Text>
-  </Screen>;
-};
+    <Text>tweets</Text>
+    <Button title="next page" onPress={() => navigation.push("TweetDetails")} />
+  </Screen>
+);
 
-const TweetDetails = () => {
+const TweetDetails = () => (
   <Screen>
-    <Text> details of page 1 </Text>
-  </Screen>;
-};
+    <Text>Here are some tweets to read always</Text>
+  </Screen>
+);
 
-const Stack = createNativeStackNavigator();
-const NativeStackNavigator = () => {
-  <Stack.NativeStackNavigator>
-    <Stack.Screen name="tweets" components={Tweet} />
-    <Stack.Screen name="tweetsdetails" components={TweetDetails} />
-  </Stack.NativeStackNavigator>;
-};
+const Stack = createStackNavigator();
 
-function App(props) {
+const StackNavigator = () => (
+  <Stack.Navigator>
+    <Stack.Screen name="ABCDEF" component={Tweets} />
+    <Stack.Screen name="problems" component={TweetDetails} />
+  </Stack.Navigator>
+);
+
+export default function App() {
   return (
     <NavigationContainer>
       <StackNavigator />
     </NavigationContainer>
   );
 }
-
-export default App;

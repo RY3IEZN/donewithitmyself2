@@ -1,6 +1,6 @@
 /** @format */
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
 import * as Yup from "yup";
 import AppForm from "./AppForm";
@@ -42,7 +42,7 @@ function ListingEditScreen() {
         onSubmit={(values) => console.log(location)}
         validationSchema={validationSchema}
       >
-        <FormImagePicker name="images" />
+        <FormImagePicker />
         <AppFormField maxLength={255} name="title" placeholder="Title" />
         <AppFormField
           keyboardType="numeric"

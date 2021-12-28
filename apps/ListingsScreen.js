@@ -1,20 +1,23 @@
 /** @format */
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { FlatList } from "react-native";
 import Screen from "./Screen";
 import Card from "./Card";
 import { StyleSheet } from "react-native";
-import { listings } from "./api/listings";
+import listingsApi from "./api/listings";
 
 function ListingsScreen(props) {
-  const [listings, setListings] = usestate([]);
+  const [listings, setListings] = useState([]);
 
   useEffect(() => {
-    listingsApi.getListings();
+    loadListings();
   }, []);
 
-  const loadListings = async () => {};
+  const loadListings = async () => {
+    const response = await listingsApi.getListings();
+    setListings(response.data);
+  };
 
   return (
     <Screen style={styles.screen}>
@@ -25,7 +28,7 @@ function ListingsScreen(props) {
           <Card
             title={item.title}
             subTitle={"$" + item.price}
-            image={item.image}
+            imageUrl={item.images[0].url}
           />
         )}
       />
