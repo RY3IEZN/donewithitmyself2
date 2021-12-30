@@ -9,6 +9,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import AuthNavigator from "./apps/navigation/AuthNavigator";
 import RegisterScreen from "./apps/RegisterScreen";
+import AppNavigator from "./apps/navigation/AppNavigator";
 
 const Tweets = ({ navigation }) => (
   <Screen>
@@ -89,7 +90,7 @@ const TabNavigator = () => (
 export default function App() {
   return (
     <NavigationContainer>
-      <AuthNavigator />
+      <AppNavigator />
     </NavigationContainer>
   );
 }

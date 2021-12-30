@@ -1,18 +1,20 @@
 /** @format */
 
 import React from "react";
-import { View, StyleSheet, Image } from "react-native";
+import { View, StyleSheet, Image, TouchableOpacity } from "react-native";
 import AppText from "./AppText";
 
-function Card({ title, subTitle, imageUrl }) {
+function Card({ title, subTitle, image, onPress }) {
   return (
-    <View style={styles.card}>
-      <Image style={styles.image} source={{ uri: imageUrl }} />
-      <View style={styles.detailContainer}>
-        <AppText style={styles.title}>{title}</AppText>
-        <AppText style={styles.subTitle}>{subTitle}</AppText>
+    <TouchableOpacity onPress={onPress}>
+      <View style={styles.card}>
+        <Image style={styles.image} source={image} />
+        <View style={styles.detailsContainer}>
+          <AppText style={styles.title}>{title}</AppText>
+          <AppText style={styles.subTitle}>{subTitle}</AppText>
+        </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 }
 
@@ -27,15 +29,17 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 200,
   },
-  detailContainer: {
-    padding: 20,
+  detailsContainer: {
+    padding: 5,
   },
   title: {
     marginBottom: 7,
+    paddingLeft: 5,
   },
   subTitle: {
     color: "green",
     fontWeight: "bold",
+    paddingLeft: 5,
   },
 });
 
