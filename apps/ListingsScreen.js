@@ -1,30 +1,41 @@
 /** @format */
 
 import React, { useEffect, useState } from "react";
-import { FlatList } from "react-native";
+import { FlatList, Button } from "react-native";
 import Screen from "./Screen";
 import Card from "./Card";
 import { StyleSheet } from "react-native";
 import routes from "./navigation/routes";
-
-const listings = [
-  {
-    id: 1,
-    title: "Red jacket for sale",
-    price: 100,
-    image: require("../assets/jacket.jpg"),
-  },
-  {
-    id: 2,
-    title: "Couch in great condition",
-    price: 1000,
-    image: require("../assets/couch.jpg"),
-  },
-];
+import listingsApi from "./api/listings";
+import AppText from "./AppText";
+import Appbutton from "./Appbutton";
+import ActivityIndicator from "./animations/ActivityIndicator";
+import listings from "./api/listings";
 
 function ListingsScreen({ navigation }) {
+  const [listings, setListings] = useState([]);
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    loadListings();
+  }, []);
+
+  const loadListings = async () => {
+    const response = await listingsApi.getListings();
+    if (!response.ok) return setError(true);
+
+    setError(false);
+    setListings(response.data);
+  };
+
   return (
     <Screen style={styles.screen}>
+      {error && (
+        <>
+          <AppText>Coudnt fetch images from the server</AppText>
+          <Button title="Retry" onPress={loadListings} />
+        </>
+      )}
       <FlatList
         data={listings}
         keyExtractor={(listing) => listing.id.toString()}
@@ -32,7 +43,7 @@ function ListingsScreen({ navigation }) {
           <Card
             title={item.title}
             subTitle={"$" + item.price}
-            image={item.image}
+            imageUrl={item.images[0].url}
             onPress={() => navigation.navigate(routes.LISTING_DETAILS, item)}
           />
         )}
@@ -44,7 +55,7 @@ function ListingsScreen({ navigation }) {
 const styles = StyleSheet.create({
   screen: {
     padding: 20,
-    backgroundColor: "grey",
+    backgroundColor: "gainsboro",
   },
 });
 

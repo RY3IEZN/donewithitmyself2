@@ -9,7 +9,7 @@ function CategoryPickerItem(item, onPress) {
   return (
     <View style={styles.container}>
       <Icon backgroundColor={item.backgroundColor} name={item.icon} size={50} />
-      <AppText>{item.label}</AppText>
+      <AppText style={styles.label}>{item.label}</AppText>
     </View>
   );
 }
@@ -20,7 +20,9 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     alignItems: "center",
   },
-  label: {},
+  label: {
+    marginTop: 3,
+  },
 });
 
 export default CategoryPickerItem;
