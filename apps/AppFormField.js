@@ -6,13 +6,21 @@ import AppTextInputBox from "./AppTextInputBox";
 import { useFormikContext } from "formik";
 
 function AppFormField({ width, name, ...otherProps }) {
-  const { setFieldTouched, handleChange, errors, touched } = useFormikContext();
+  const {
+    setFieldTouched,
+    setFieldValue,
+    values,
+    handleChange,
+    errors,
+    touched,
+  } = useFormikContext();
 
   return (
     <>
       <AppTextInputBox
-        onBlur={() => setFieldTouched("name")}
-        onChangeText={handleChange("name")}
+        onBlur={() => setFieldTouched(name)}
+        onChangeText={(text) => setFieldValue(name, text)}
+        value={values[name]}
         {...otherProps}
         width={width}
       />

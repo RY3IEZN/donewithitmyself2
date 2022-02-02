@@ -11,6 +11,8 @@ import Screen from "./Screen";
 import CategoryPickerItem from "./CategoryPickerItem";
 import FormImagePicker from "./FormImagePicker";
 import useLocation from "./useLocation";
+import listingsApi from "./api/listings";
+import UploadScreen from "./UploadScreen";
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().required().min(1).label("Title"),
@@ -23,14 +25,37 @@ const validationSchema = Yup.object().shape({
 const categories = [
   { label: "Furniture", value: 1, backgroundColor: "red", icon: "apps" },
   { label: "Clothing", value: 2, backgroundColor: "blue", icon: "email" },
-  { label: "Camera", value: 3, backgroundColor: "yellow", icon: "lock" },
+  { label: "Camera", value: 3, backgroundColor: "orange", icon: "lock" },
 ];
 
 function ListingEditScreen() {
   const location = useLocation();
+  const [uploadVisible, setUploadVisible] = useState(false);
+  const [progress, setProgress] = useState(0);
+
+  handleSubmit = async (listing, { resetForm }) => {
+    setProgress(0);
+    setUploadVisible(true);
+    const result = await listingsApi.addListing(
+      { ...listing, location },
+      (progress) => setProgress(progress)
+    );
+
+    if (!result.ok) {
+      setUploadvisible(false);
+      alert("could not save the listing");
+    }
+
+    resetForm();
+  };
 
   return (
     <Screen style={styles.container}>
+      <UploadScreen
+        onDone={() => setUploadVisible(false)}
+        progress={progress}
+        visible={uploadVisible}
+      />
       <AppForm
         initialValues={{
           title: "",
@@ -39,7 +64,7 @@ function ListingEditScreen() {
           category: null,
           images: [],
         }}
-        onSubmit={(values) => console.log(location)}
+        onSubmit={handleSubmit}
         validationSchema={validationSchema}
       >
         <FormImagePicker name="images" />
@@ -64,7 +89,7 @@ function ListingEditScreen() {
           numberOfLines={3}
           placeholder="Description"
         />
-        <SubmitButton title="Post" />
+        <SubmitButton title="Post" onpress={() => console.log("pressed")} />
       </AppForm>
     </Screen>
   );

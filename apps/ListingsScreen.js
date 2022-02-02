@@ -11,22 +11,19 @@ import AppText from "./AppText";
 import Appbutton from "./Appbutton";
 import ActivityIndicator from "./animations/ActivityIndicator";
 import listings from "./api/listings";
+import useApi from "./Hooks/useApi";
 
 function ListingsScreen({ navigation }) {
-  const [listings, setListings] = useState([]);
-  const [error, setError] = useState(false);
+  const {
+    listings,
+    error,
+    loading,
+    request: loadListings,
+  } = useApi(listingsApi.getListings);
 
   useEffect(() => {
     loadListings();
   }, []);
-
-  const loadListings = async () => {
-    const response = await listingsApi.getListings();
-    if (!response.ok) return setError(true);
-
-    setError(false);
-    setListings(response.data);
-  };
 
   return (
     <Screen style={styles.screen}>
@@ -36,6 +33,7 @@ function ListingsScreen({ navigation }) {
           <Button title="Retry" onPress={loadListings} />
         </>
       )}
+      <ActivityIndicator visible={loading} />
       <FlatList
         data={listings}
         keyExtractor={(listing) => listing.id.toString()}
@@ -45,6 +43,7 @@ function ListingsScreen({ navigation }) {
             subTitle={"$" + item.price}
             imageUrl={item.images[0].url}
             onPress={() => navigation.navigate(routes.LISTING_DETAILS, item)}
+            thumbnailUrl={item.images[0].thumbnailUrl}
           />
         )}
       />
@@ -55,7 +54,6 @@ function ListingsScreen({ navigation }) {
 const styles = StyleSheet.create({
   screen: {
     padding: 20,
-    backgroundColor: "gainsboro",
   },
 });
 

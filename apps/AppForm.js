@@ -7,7 +7,7 @@ function AppForm({ initialValues, onSubmit, validationSchema, children }) {
   return (
     <Formik
       initialValues={{ email: "email", password: "password" }}
-      onSubmit={(values) => console.log(values)}
+      onSubmit={onSubmit}
       validationSchema={validationSchema}
     >
       {() => <>{children}</>}

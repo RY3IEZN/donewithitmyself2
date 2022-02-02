@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 
 export default useApi = (apiFunc) => {
-  const [data, setdata] = useState([]);
+  const [listings, setListings] = useState([]);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -20,7 +20,8 @@ export default useApi = (apiFunc) => {
 
   return {
     request,
-    data,
+    listings,
     loading,
+    error,
   };
 };

@@ -11,6 +11,7 @@ import {
   Button,
   FlatList,
   PickerItemComponent,
+  TouchableOpacity,
 } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import AppText from "./AppText";
@@ -30,8 +31,8 @@ function AppPicker({
   const [modalVisible, setModalVisible] = useState(false);
 
   return (
-    <React.Fragment>
-      <TouchableWithoutFeedback onPress={() => setModalVisible(true)}>
+    <>
+      <TouchableOpacity onPress={() => setModalVisible(true)}>
         <View style={[styles.container, { width }]}>
           {icon && (
             <MaterialCommunityIcons
@@ -41,15 +42,12 @@ function AppPicker({
               style={styles.icons}
             />
           )}
-
           <AppText style={styles.text}>
             {selectedItem ? selectedItem.label : placeholder}
           </AppText>
-
           <MaterialCommunityIcons name="chevron-down" size={30} color="black" />
         </View>
-      </TouchableWithoutFeedback>
-
+      </TouchableOpacity>
       <Modal visible={modalVisible} animationType="fade">
         <Screen>
           <Button title="close" onPress={() => setModalVisible(false)} />
@@ -70,7 +68,7 @@ function AppPicker({
           />
         </Screen>
       </Modal>
-    </React.Fragment>
+    </>
   );
 }
 
